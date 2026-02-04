@@ -1,57 +1,57 @@
-/*Problem: Implement linear search to find key k in an array. Count and display the number of comparisons performed.
+/*Problem: Given an array of n integers, reverse the array in-place using two-pointer approach.
 
 Input:
-- First line: integer n (array size)
+- First line: integer n
 - Second line: n space-separated integers
-- Third line: integer k (key to search)
 
 Output:
-- Line 1: "Found at index i" OR "Not Found"
-Line 2: "Comparisons = c"
+- Print the reversed array, space-separated
 
 Example:
 Input:
 5
-10 20 30 40 50
-30
+1 2 3 4 5
 
 Output:
-Found at index 2
-Comparisons = 3
+5 4 3 2 1
 
-Explanation: Compared with 10, 20, 30 (found at index 2 with 3 comparisons)*/
+Explanation: Swap pairs from both ends: (1,5), (2,4), middle 3 stays*/
 
 #include <stdio.h>
 
+void reverseArray(int arr[], int n) {
+    int left = 0;
+    int right = n - 1;
+    int temp;
+
+    while (left < right) {
+
+        temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+
+        left++;
+        right--;
+    }
+}
+
 int main() {
-    int n, k, i;
-    int found_index = -1;
-    int comparisons = 0;
-
+    int n;
+    
     if (scanf("%d", &n) != 1) return 0;
-
+    
     int arr[n];
-
-    for (i = 0; i < n; i++) {
+    
+    for (int i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
 
-    scanf("%d", &k);
+    reverseArray(arr, n);
 
-    for (i = 0; i < n; i++) {
-        comparisons++;
-        if (arr[i] == k) {
-            found_index = i;
-            break;
-        }
+    for (int i = 0; i < n; i++) {
+        printf("%d%s", arr[i], (i == n - 1) ? "" : " ");
     }
-
-    if (found_index != -1) {
-        printf("Found at index %d\n", found_index);
-    } else {
-        printf("Not Found\n");
-    }
-    printf("Comparisons = %d\n", comparisons);
+    printf("\n");
 
     return 0;
 }
